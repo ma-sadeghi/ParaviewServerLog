@@ -1,0 +1,14 @@
+[Unit]
+Description=pvserver1
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=amin
+ExecStart=/home/amin/Programs/ParaView-5.8/bin/pvserver --server-port=11111
+
+[Install]
+WantedBy=multi-user.target
