@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&family=Karla:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+
+body {
+  font-family: "Alegreya"
+}
+
+main {
+  font-size: 130%;
+}
+
+p {
+  font-size: 90%;
+}
+
+h1, h2, h3, h4 {
+  font-size: 200%;
+  font-family: "VT323";
+  /*font-weight: bold;*/
+}
+
+.navbar {
+  background-color: #e3f2fd;
+}
+
+.navbar-left img#banner {
+  height: 50px;
+  margin-right: 7px;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+  font-family: "VT323";
+  font-weight: bold;
+}
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #f36d33;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+
+.icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.in-use::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f05e";
+  color: red;
+}
+
+.available::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f00c";
+  color: green;
+}
+

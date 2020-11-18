@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+main > .container {
+  padding: 60px 15px 0;
+}
+
+.footer {
+  font-family: "Ubuntu Mono";
+  background-color: #f5f5f5;
+  font-size: 1.2em;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
