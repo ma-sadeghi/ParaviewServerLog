@@ -25,13 +25,21 @@ def is_service_running(name):
     return status
 
 
+def is_port_busy(number):
+    bash_command = f"netstat -nputw | grep {number}"
+    out = run(bash_command, shell=True, capture_output=True).stdout.decode('utf-8')
+    status = True if f"{number}" in out else False
+    return status
+
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
 @app.route('/', methods=['GET',])
 def home():
-    service_names = ["pvserver1", "pvserver2", "pvserver3"]
-    flags = [is_service_running(name) for name in service_names]
+    services = ["pvserver1", "pvserver2", "pvserver3"]
+    ports = [11111, 11112, 11113]
+    flags = [is_service_running(s) and is_port_busy(p) for s, p in zip(services, ports)]
     statuses = ["available" if flag else "in-use" for flag in flags]
     colors = ["green" if flag else "red" for flag in flags]
     out = render_template(
