@@ -4,7 +4,7 @@
     <title>PMEAL Workstations Panel</title>
 
     <!-- Require metas -->
-    <meta http-equiv="refresh" content="5">
+    <!-- <meta http-equiv="refresh" content="5"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Awesome fonts CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,8 +43,6 @@
 
       <h1 class="mt-5">Paraview server live tracker</h1>
 
-      <div id="test"></div>
-
       <p>
         Here you can learn about the current status of Paraview servers currently
         running on our Lenovo machine.
@@ -63,6 +61,20 @@
       </p>
 
       <h2>Live status</h2>
+
+      <table class="table" id="test">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Service name</th>
+            <th scope="col">Port</th>
+            <th scope="col">Status</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
 
       <table class="table">
         <thead class="thead-dark">

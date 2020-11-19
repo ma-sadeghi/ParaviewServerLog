@@ -33,15 +33,20 @@ def is_pvserver_available(service_name, port_number):
     return status_service and status_port
 
 
-services = ["pvserver1", "pvserver2", "pvserver3"]
-ports = [11111, 11112, 11113]
+# Our so-called "databased"
+pvserver_instances = {
+    "pvserver1": 11111,
+    "pvserver2": 11112,
+    "pvserver3": 11113
+}
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
 
 @app.route('/', methods=['GET',])
 def home():
-    flags = [is_pvserver_available(s, p) for s, p in zip(services, ports)]
+    flags = [is_pvserver_available(s, p) for s, p in pvserver_instances.items()]
     statuses = ["available" if flag else "in-use" for flag in flags]
     colors = ["green" if flag else "red" for flag in flags]
     out = render_template(
@@ -83,5 +88,11 @@ def api_id():
     return jsonify(result)
 
 
+@app.route('/api/v1/resources/pvserver/all', methods=['GET'])
+def api_all():
+    results = pvserver_instances
+    return jsonify(results)
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="127.0.0.1", debug=True)
