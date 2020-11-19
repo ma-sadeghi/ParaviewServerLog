@@ -2,7 +2,7 @@ import os
 import subprocess
 from subprocess import Popen, PIPE
 from subprocess import check_output, run
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 
 
 def run_shell_script(fname):
@@ -11,11 +11,6 @@ def run_shell_script(fname):
     if stderr:
         raise Exception(f"Error {stderr}")
     return stdout.decode('utf-8')
-
-
-def run_shell_script2(script):
-    stdout = check_output([script]).decode('utf-8')
-    return stdout
 
 
 def is_service_running(name):
@@ -38,13 +33,14 @@ def is_pvserver_available(service_name, port_number):
     return status_service and status_port
 
 
+services = ["pvserver1", "pvserver2", "pvserver3"]
+ports = [11111, 11112, 11113]
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
+
 @app.route('/', methods=['GET',])
 def home():
-    services = ["pvserver1", "pvserver2", "pvserver3"]
-    ports = [11111, 11112, 11113]
     flags = [is_pvserver_available(s, p) for s, p in zip(services, ports)]
     statuses = ["available" if flag else "in-use" for flag in flags]
     colors = ["green" if flag else "red" for flag in flags]
@@ -55,5 +51,37 @@ def home():
     )
     return out
 
+
+@app.route('/api/v1/resources/pvserver', methods=['GET'])
+def api_id():
+    # Check if an ID was provided as part of the URL.
+    # If ID is provided, assign it to a variable.
+    # If no ID is provided, display an error in the browser.
+    if 'port' in request.args:
+        port = int(request.args['port'])
+    else:
+        return "Error: No port field provided. Please specify a port."
+    
+    if 'name' in request.args:
+        name = request.args['name']
+    else:
+        return "Error: No name field provided. Please specify a name."
+
+    # # Create an empty list for our results
+    # results = []
+
+    # # Loop through the data and match results that fit the requested ID.
+    # # IDs are unique, but other fields might return many results
+    # for book in books:
+    #     if book['id'] == id:
+    #         results.append(book)
+
+    # Use the jsonify function from Flask to convert our list of
+    # Python dictionaries to the JSON format.
+    # return jsonify(results)
+    result = is_pvserver_available(name, port)
+    return jsonify(result)
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="127.0.0.1", debug=True)
