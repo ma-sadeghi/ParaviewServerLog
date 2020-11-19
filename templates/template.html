@@ -16,7 +16,7 @@
     <link href="/static/css/sticky-footer-navbar.css" rel="stylesheet">
     <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">    
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
 
 
   </head>
@@ -25,7 +25,7 @@
   <header>
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-light fixed-top">
-    <a href="http://www.pmeal.com/" class="navbar-left"><img src="/static/images/banner.png" id="banner"></a>
+    <a href="http://www.pmeal.com/" class="navbar-left"><img src="/static/images/banner.png" id="banner" class="d-none d-lg-block"></a>
     <div class="navbar-brand">Workstations' control panel</div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -62,40 +62,17 @@
 
       <h2>Live status</h2>
 
-      <table class="table" id="test">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Service name</th>
-            <th scope="col">Port</th>
-            <th scope="col">Status</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
+            <th scope="col" class="d-none d-lg-block">#</th>
             <th scope="col">Service name</th>
             <th scope="col">Port</th>
             <th scope="col">Status</th>
-            <th scope="col">Description</th>
+            <th scope="col" class="d-none d-lg-block">Description</th>
           </tr>
         </thead>
-        <tbody>
-          {% for i in range(3) %}
-          <tr>
-            <th scope="row">{{ i+1 }}</th>
-            <td><code>pvserver{{ i+1 }}</code></td>
-            <td>{{ 11111+i }}</td>
-            <td><span class="icon {{ statuses[i] }}"></span></td>
-            <td style="color:{{ colors[i] }}">{{ statuses[i] }}</td>
-          </tr>
-          {% endfor %}
+        <tbody id="tableRows">
         </tbody>
       </table>
 

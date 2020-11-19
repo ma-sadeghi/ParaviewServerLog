@@ -6,7 +6,8 @@
 
 
 body {
-  font-family: "Alegreya"
+  font-family: "Alegreya";
+  min-width: 385px;
 }
 
 main {
@@ -20,7 +21,6 @@ p {
 h1, h2, h3, h4 {
   font-size: 200%;
   font-family: "VT323";
-  /*font-weight: bold;*/
 }
 
 .navbar {
@@ -76,4 +76,3 @@ pre {
   content: "\f00c";
   color: green;
 }
-

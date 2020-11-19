@@ -5,7 +5,8 @@ main > .container {
 }
 
 .footer {
-  font-family: "Ubuntu Mono";
+  /*font-family: "Ubuntu Mono";*/
+  font-family: "VT323";
   background-color: #f5f5f5;
   font-size: 1.2em;
 }
