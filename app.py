@@ -33,6 +33,13 @@ def is_pvserver_available(service_name, port_number):
     return status_service and status_port
 
 
+def update_pvserver_instances(instances):
+    r"""Update availability based on realtime data"""
+    status = {True: "available", False: "in-use"}
+    for k, v in instances.items():
+        is_available = is_pvserver_available(v["name"], v["port"])
+        v["status"] = status[is_available]
+
 # Our so-called "databased"
 pvserver_instances = {
     0: {"name": "pvserver1", "port": 11111, "status": ""},
@@ -40,11 +47,7 @@ pvserver_instances = {
     2: {"name": "pvserver3", "port": 11113, "status": ""}
 }
 # Update availability based on realtime data
-status= {True: "available", False: "in-use"}
-for k, v in pvserver_instances.items():
-    is_available = is_pvserver_available(v["name"], v["port"])
-    v["status"] = status[is_available]
-
+update_pvserver_instances(pvserver_instances)
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -84,10 +87,17 @@ def api_id():
     return jsonify(result)
 
 
-@app.route('/api/v1/resources/pvserver/all', methods=['GET'])
+@app.route('/api/v1/resources/pvserver/all', methods=['GET'], strict_slashes=False)
 def api_all():
+    r"""Fetch available pvserver instanes and return in JSON format"""
+    update_pvserver_instances(pvserver_instances)
     return jsonify(pvserver_instances)
 
 
+@app.route('/amin', methods=['GET'])
+def api_amin():
+    return "amin"
+
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", debug=True)
+    app.run(host="127.0.0.5", debug=True)

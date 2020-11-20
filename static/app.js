@@ -1,5 +1,5 @@
 function updateTable() {
-	url = "/api/v1/resources/pvserver/all"
+	url = "api/v1/resources/pvserver/all"
 	response = $.getJSON(url, function(data){
         populateTable(data);
     });
